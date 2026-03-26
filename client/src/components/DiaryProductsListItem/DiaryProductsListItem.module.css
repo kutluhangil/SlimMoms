@@ -1,0 +1,36 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.name {
+  flex: 1;
+  font-size: 14px;
+  color: #212121;
+}
+
+.weight,
+.calories {
+  font-size: 14px;
+  color: #9b9faa;
+  min-width: 60px;
+  text-align: right;
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #9b9faa;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+  padding: 0 4px;
+}
+
+.deleteBtn:hover {
+  color: #fc842d;
+}

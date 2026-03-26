@@ -1,0 +1,46 @@
+.wrapper {
+  padding: 32px;
+}
+
+.title {
+  font-size: 14px;
+  color: #9b9faa;
+  margin-bottom: 8px;
+}
+
+.calories {
+  font-size: 48px;
+  font-weight: 700;
+  color: #212121;
+  line-height: 1;
+}
+
+.unit {
+  font-size: 20px;
+  font-weight: 400;
+  color: #9b9faa;
+}
+
+.notRecommended {
+  margin-top: 24px;
+}
+
+.subtitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #212121;
+  margin-bottom: 12px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item {
+  font-size: 14px;
+  color: #9b9faa;
+}

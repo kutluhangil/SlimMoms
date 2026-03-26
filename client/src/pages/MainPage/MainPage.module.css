@@ -1,0 +1,7 @@
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 32px;
+  min-height: calc(100vh - 80px);
+}
