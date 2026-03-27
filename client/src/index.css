@@ -50,3 +50,33 @@ img {
   display: block;
   max-width: 100%;
 }
+
+/* ── React Toastify overrides ── */
+.Toastify__toast {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  color: var(--color-text);
+  background-color: var(--color-white);
+}
+
+.Toastify__toast--success .Toastify__toast-icon svg {
+  fill: var(--color-primary);
+}
+
+.Toastify__progress-bar--success {
+  background: var(--color-primary);
+}
+
+.Toastify__toast--error .Toastify__toast-icon svg {
+  fill: #e53935;
+}
+
+.Toastify__progress-bar--error {
+  background: #e53935;
+}
+
+.Toastify__close-button {
+  color: var(--color-text-secondary);
+}

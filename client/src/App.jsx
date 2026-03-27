@@ -1,6 +1,8 @@
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { store, persistor } from './redux/store';
 
@@ -18,6 +20,7 @@ import CalculatorPage from './pages/CalculatorPage/CalculatorPage';
 const AppContent = () => {
   return (
     <BrowserRouter>
+      <ToastContainer position="top-right" autoClose={3000} />
       <Header />
       <Loader />
       <Routes>
