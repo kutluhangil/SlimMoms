@@ -10,3 +10,20 @@
   flex-direction: column;
   gap: 24px;
 }
+
+@media (max-width: 1024px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .main {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 16px;
+    gap: 16px;
+  }
+}

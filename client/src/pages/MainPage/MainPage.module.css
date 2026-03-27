@@ -4,4 +4,59 @@
   align-items: flex-start;
   padding: 60px 32px;
   min-height: calc(100vh - 80px);
+  position: relative;
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  width: 100%;
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 700;
+  color: #212121;
+  line-height: 1.2;
+  margin-bottom: 40px;
+  max-width: 420px;
+}
+
+.decor {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #f0f1ef;
+  z-index: 0;
+}
+
+@media (max-width: 1024px) {
+  .page {
+    padding: 40px 24px;
+    flex-direction: column;
+  }
+
+  .title {
+    font-size: 28px;
+    max-width: 100%;
+  }
+
+  .decor {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 24px 16px;
+  }
+
+  .title {
+    font-size: 22px;
+    margin-bottom: 24px;
+  }
 }

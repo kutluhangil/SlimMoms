@@ -1,5 +1,7 @@
 .wrapper {
   padding: 32px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .title {
@@ -43,4 +45,46 @@
 .item {
   font-size: 14px;
   color: #9b9faa;
+}
+
+.btn {
+  margin-top: 24px;
+  padding: 12px 32px;
+  background-color: #fc842d;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: #f27b24;
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    padding: 24px;
+  }
+
+  .calories {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 20px 16px;
+  }
+
+  .calories {
+    font-size: 32px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
 }
