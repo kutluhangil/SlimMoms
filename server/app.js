@@ -4,11 +4,14 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const connectDB = require('./db/connect');
 const authRoutes = require('./routes/authRoutes');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('./helpers/swagger');
 
 dotenv.config();
 
 const app = express();
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());

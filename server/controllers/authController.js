@@ -2,7 +2,6 @@ const Users = require('../models/User');
 const { generateToken } = require('../helpers/jwt');
 const bcrypt = require('bcryptjs');
 
-
 const registerUser = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
@@ -44,6 +43,7 @@ const registerUser = async (req, res, next) => {
     });
   }
 };
+
 
 const loginUser = async (req, res, next) => {
     try {
@@ -87,6 +87,7 @@ const loginUser = async (req, res, next) => {
   }
 };
 
+
 const logoutUser = async (req, res, next) => {
   try {
     req.user.token = null;
@@ -100,6 +101,7 @@ const logoutUser = async (req, res, next) => {
     });
   }
 };
+
 
 const getCurrentUser = async (req, res, next) => {
   try {
