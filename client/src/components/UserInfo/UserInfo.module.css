@@ -1,31 +1,94 @@
+/* ========================
+   UserInfo Component Styles
+   SlimMom Design System
+   ======================== */
+
 .wrapper {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
+/* ── User (avatar + name) ── */
+.user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #fc842d;
+  color: #fff;
+  font-family: 'Verdana', Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  user-select: none;
+}
+
 .name {
+  font-family: 'Verdana', Geneva, Tahoma, sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: #212121;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* ── Divider ── */
 .divider {
-  color: #e0e0e0;
+  width: 1px;
+  height: 24px;
+  background-color: rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
-.logoutBtn {
-  background: none;
+/* ── Exit button ── */
+.exitBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
   border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  outline: none;
+  transition: opacity 0.2s ease;
+}
+
+.exitBtn:hover {
+  opacity: 0.7;
+}
+
+.exitBtn:focus-visible {
+  outline: 2px solid #fc842d;
+  border-radius: 4px;
+}
+
+.exitIcon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.exitBtn:hover .exitIcon {
+  transform: translateX(2px);
+}
+
+.exitText {
+  font-family: 'Verdana', Geneva, Tahoma, sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: #9b9faa;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  transition: color 0.2s;
-}
-
-.logoutBtn:hover {
-  color: #212121;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }

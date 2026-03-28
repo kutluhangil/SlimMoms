@@ -1,7 +1,69 @@
 .page {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 80px);
-  padding: 40px 32px;
+  overflow: hidden;
+  margin: 150px 0 0 15px;
+}
+
+/* ── Content ── */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 400px;
+}
+
+/* ── Title ── */
+.title {
+  font-family: 'Verdana', Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  color: #fc842d;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+
+/* Tablet: 768px+ */
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 80px 32px;
+  }
+
+  .content {
+    gap: 40px;
+    max-width: 480px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .bgShape {
+    display: block;
+  }
+}
+
+/* Desktop: 1280px+ */
+@media screen and (min-width: 1280px) {
+  .container {
+    padding: 100px 0;
+    display: flex;
+    align-items: center;
+    min-height: calc(100vh - 88px);
+  }
+
+  .content {
+    gap: 48px;
+    max-width: 520px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .bgShape {
+    width: 650px;
+    height: 650px;
+    right: -150px;
+  }
 }

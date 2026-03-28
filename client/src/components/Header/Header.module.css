@@ -1,8 +1,171 @@
+/* ── Base ── */
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+}
+
+.container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 32px;
+  max-width: 1280px;
+  margin: 30px 15px;
+  padding: 16px 20px;
+}
+
+/* ── Sol grup: Logo + divider + auth links ── */
+.leftGroup {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ── Desktop nav (login durumu, sağda) ── */
+.desktopNav {
+  display: none;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ── Divider ── */
+.divider {
+  width: 1px;
+  height: 32px;
+  background-color: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+/* ── Auth links: mobilde gizli, tablet+ görünür ── */
+.authLinks {
+  display: none;
+  align-items: center;
+  gap: 16px;
+}
+
+.authLink {
+  font-family: 'Verdana', Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #9b9faa;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+}
+
+.authLink:hover {
+  color: #fc842d;
+}
+
+/* Aktif auth link */
+.authLinkActive {
+  color: #212121;
+}
+
+/* ── Hamburger ── */
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.burger:focus-visible {
+  outline: 2px solid #fc842d;
+  border-radius: 4px;
+}
+
+.burgerLine {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #212121;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+.burgerLineTop { transform: translateY(7px) rotate(45deg); }
+.burgerLineMid { opacity: 0; transform: scaleX(0); }
+.burgerLineBot { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile dropdown ── */
+.mobileMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.08);
+  animation: slideDown 0.2s ease forwards;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.mobileAuthLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Tablet: 768px+ ── */
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 20px 32px;
+  }
+
+  .authLinks {
+    display: flex;
+  }
+
+  .desktopNav {
+    display: flex;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .mobileMenu {
+    display: none !important;
+  }
+}
+
+/* ── Desktop: 1280px+ ── */
+@media screen and (min-width: 1280px) {
+  .container {
+    padding: 24px 0;
+  }
+
+  .desktopNav {
+    gap: 32px;
+  }
+
+  .leftGroup {
+    gap: 32px;
+  }
+
+  .authLink {
+    font-size: 14px;
+  }
+
+  .header {
+    box-shadow: none;
+  }
 }

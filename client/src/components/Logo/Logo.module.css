@@ -1,11 +1,69 @@
 .logo {
-  font-size: 24px;
-  font-weight: 700;
-  color: #212121;
-  text-decoration: none;
-  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  width: fit-content;
 }
 
-.accent {
+.logo:focus-visible {
+  outline: 2px solid #fc842d;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Icon */
+.icon {
+  width: 70px;
+  height: 66px;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover .icon {
+  transform: scale(1.05);
+}
+
+/* Text */
+.text {
+  font-family: 'Verdana', Geneva, Tahoma, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+
+  /* Mobile: hidden */
+  display: none;
+}
+
+.slim {
+  font-size: 24px;
+  font-weight: 100;
+  color: #212121;
+}
+
+.mom {
+  font-size: 24px;
+  font-weight: 100;
   color: #fc842d;
+}
+
+/* Tablet: 768px+ — show text */
+@media screen and (min-width: 768px) {
+  .text {
+    display: inline;
+  }
+}
+
+/* Desktop: 1280px+ — slightly larger logo */
+@media screen and (min-width: 1280px) {
+  .icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .text {
+    font-size: 26px;
+  }
 }

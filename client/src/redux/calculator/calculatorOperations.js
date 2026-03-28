@@ -4,13 +4,13 @@ import axiosInstance from '../../api/axiosInstance';
 import { showLoader, hideLoader } from '../loader/loaderSlice';
 
 export const calculateDailyCalories = createAsyncThunk(
-  'calculator/calculate',
+  'calculator/calculateDailyCalories',
   async (formData, thunkAPI) => {
     thunkAPI.dispatch(showLoader());
     try {
-      const { data } = await axiosInstance.post('/products/calories', formData);
+      const { data } = await axiosInstance.post('/products/private', formData);
       toast.success('Daily calories calculated');
-      return data;
+      return data; // fulfilled → extraReducers'da state'e yazılır
     } catch (error) {
       toast.error(error.response?.data?.message ?? 'Calculation failed');
       return thunkAPI.rejectWithValue(error.response?.data?.message);
