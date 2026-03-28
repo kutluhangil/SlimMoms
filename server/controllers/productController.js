@@ -1,7 +1,5 @@
 const Product = require('../models/Product');
 
-// GET /api/products?q=<query>
-// No auth required
 const searchProducts = async (req, res, next) => {
   try {
     const { q } = req.query;
@@ -22,9 +20,6 @@ const searchProducts = async (req, res, next) => {
   }
 };
 
-// POST /api/products/public
-// No auth required
-// Body: { height, currentWeight, desiredWeight, age, bloodType }
 const getPublicCalories = async (req, res, next) => {
   try {
     const { height, currentWeight, desiredWeight, age, bloodType } = req.body;
@@ -37,8 +32,7 @@ const getPublicCalories = async (req, res, next) => {
       bloodType === undefined
     ) {
       return res.status(400).json({
-        message:
-          'Missing required fields: height, currentWeight, desiredWeight, age, bloodType',
+        message: 'Missing required fields: height, currentWeight, desiredWeight, age, bloodType',
       });
     }
 
@@ -50,9 +44,7 @@ const getPublicCalories = async (req, res, next) => {
         10 * (currentWeight - desiredWeight)
     );
 
-    const notRecommendedProducts = await Product.find({
-      categories: bloodType,
-    });
+    const notRecommendedProducts = await Product.find({ categories: bloodType });
 
     return res.status(200).json({ dailyCalories, notRecommendedProducts });
   } catch (err) {
@@ -60,10 +52,6 @@ const getPublicCalories = async (req, res, next) => {
   }
 };
 
-// POST /api/products/private
-// Auth required (authenticate middleware)
-// Body: { height, currentWeight, desiredWeight, age, bloodType }
-// Saves dailyCalories + notRecommendedProducts to the authenticated user's document
 const getPrivateCalories = async (req, res, next) => {
   try {
     const { height, currentWeight, desiredWeight, age, bloodType } = req.body;
@@ -76,8 +64,7 @@ const getPrivateCalories = async (req, res, next) => {
       bloodType === undefined
     ) {
       return res.status(400).json({
-        message:
-          'Missing required fields: height, currentWeight, desiredWeight, age, bloodType',
+        message: 'Missing required fields: height, currentWeight, desiredWeight, age, bloodType',
       });
     }
 
@@ -89,12 +76,8 @@ const getPrivateCalories = async (req, res, next) => {
         10 * (currentWeight - desiredWeight)
     );
 
-    const notRecommendedProducts = await Product.find({
-      categories: bloodType,
-    });
+    const notRecommendedProducts = await Product.find({ categories: bloodType });
 
-    // Persist the result on the authenticated user's document
-    // NOTE: depends on User model having dailyCalories + notRecommendedProducts fields
     req.user.dailyCalories = dailyCalories;
     req.user.notRecommendedProducts = notRecommendedProducts.map(
       (p) => p.title.ua || p.title.ru || String(p._id)

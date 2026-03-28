@@ -26,7 +26,7 @@ const eatenProductSchema = new Schema(
 const dayInfoSchema = new Schema(
   {
     date: {
-      type: String, // format: "YYYY-MM-DD"
+      type: String, // YYYY-MM-DD
       required: true,
     },
     userId: {
@@ -48,7 +48,7 @@ const dayInfoSchema = new Schema(
   { versionKey: false }
 );
 
-// Compound unique index: one DayInfo doc per user per date
+// one record per user per day
 dayInfoSchema.index({ date: 1, userId: 1 }, { unique: true });
 
 module.exports = model('DayInfo', dayInfoSchema);
