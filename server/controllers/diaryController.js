@@ -15,7 +15,6 @@ const addProduct = async (req, res, next) => {
     }
 
     const portionCalories = Math.round((product.calories / 100) * weight);
-    const productTitle = product.title.ua || product.title.ru;
 
     let dayInfo = await DayInfo.findOne({ date, userId: req.user._id });
 
@@ -30,7 +29,7 @@ const addProduct = async (req, res, next) => {
 
     dayInfo.eatenProducts.push({
       productId: product._id,
-      title: productTitle,
+      title: product.title,
       weight,
       calories: portionCalories,
     });

@@ -3,26 +3,22 @@ const { Schema, model } = require('mongoose');
 const productSchema = new Schema(
   {
     categories: {
-      type: [String],
-      default: [],
+      type: String,
     },
     weight: {
       type: Number,
-      required: true,
     },
     title: {
-      ua: {
-        type: String,
-        required: true,
-      },
-      ru: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
     },
     calories: {
       type: Number,
       required: true,
+    },
+    groupBloodNotAllowed: {
+      type: [Schema.Types.Mixed],
+      default: [],
     },
   },
   { versionKey: false }

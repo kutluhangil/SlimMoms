@@ -17,7 +17,13 @@ const seed = async () => {
   }
 
   const raw = fs.readFileSync(dataPath, 'utf-8');
-  const products = JSON.parse(raw);
+  const rawProducts = JSON.parse(raw);
+
+  // transform mongo extended json _id to ObjectId, drop __v
+  const products = rawProducts.map(({ _id, __v, ...rest }) => ({
+    _id: new mongoose.Types.ObjectId(_id.$oid),
+    ...rest,
+  }));
 
   await Product.deleteMany({});
 

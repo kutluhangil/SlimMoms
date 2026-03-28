@@ -8,10 +8,8 @@ const searchProducts = async (req, res, next) => {
       return res.status(400).json({ message: 'Query parameter "q" is required' });
     }
 
-    const searchRegex = new RegExp(q.trim(), 'i');
-
     const products = await Product.find({
-      $or: [{ 'title.ua': searchRegex }, { 'title.ru': searchRegex }],
+      title: { $regex: q.trim(), $options: 'i' },
     }).limit(10);
 
     return res.status(200).json(products);
@@ -44,7 +42,10 @@ const getPublicCalories = async (req, res, next) => {
         10 * (currentWeight - desiredWeight)
     );
 
-    const notRecommendedProducts = await Product.find({ categories: bloodType });
+    // groupBloodNotAllowed[bloodType] === true means not allowed for that blood type
+    const notRecommendedProducts = await Product.find({
+      [`groupBloodNotAllowed.${bloodType}`]: true,
+    });
 
     return res.status(200).json({ dailyCalories, notRecommendedProducts });
   } catch (err) {
@@ -76,12 +77,12 @@ const getPrivateCalories = async (req, res, next) => {
         10 * (currentWeight - desiredWeight)
     );
 
-    const notRecommendedProducts = await Product.find({ categories: bloodType });
+    const notRecommendedProducts = await Product.find({
+      [`groupBloodNotAllowed.${bloodType}`]: true,
+    });
 
     req.user.dailyCalories = dailyCalories;
-    req.user.notRecommendedProducts = notRecommendedProducts.map(
-      (p) => p.title.ua || p.title.ru || String(p._id)
-    );
+    req.user.notRecommendedProducts = notRecommendedProducts.map((p) => p.title);
     await req.user.save();
 
     return res.status(200).json({ dailyCalories, notRecommendedProducts });
