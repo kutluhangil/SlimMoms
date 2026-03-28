@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const { Schema, model } = require('mongoose');
 
 const usersSchema = new Schema(
@@ -44,12 +45,18 @@ const usersSchema = new Schema(
 );
 
 //Password Hashleme
-usersSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
+usersSchema.pre('save', async function () {
+  if (!this.isModified('password')) return;
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+  }
+  catch (error) {
+    throw error; // Hatayı Mongoose yakalar
+  }
 });
 
 const userSchema = new Schema({});
 
-module.exports = model('User', userSchema);
+module.exports = model('User', usersSchema);

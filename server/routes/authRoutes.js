@@ -6,6 +6,7 @@ const {
   registerUser,
   loginUser,
   logoutUser,
+  getCurrentUser
 } = require('../controllers/authController');
 
 // REGISTER
@@ -16,5 +17,8 @@ router.post('/login', loginUser);
 
 // LOGOUT (protected)
 router.post('/logout', authenticate, logoutUser);
+
+// GET /api/auth/current
+router.get('/current', authenticate, getCurrentUser);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const Users = require('../models/User');
-const  generateToken  = require('../helpers/jwt.js');
+const { generateToken } = require('../helpers/jwt');
 const bcrypt = require('bcryptjs');
 
 
@@ -31,11 +31,11 @@ const registerUser = async (req, res, next) => {
 
     // Response
     res.status(201).json({
-      user: {
-        name: user.name,
-        email: user.email,
-      },
-      token,
+  user: {
+    name: user.name || name,
+    email: user.email || email,
+  },
+  token,
     });
   } catch (error) {
     res.status(500).json({
@@ -101,6 +101,25 @@ const logoutUser = async (req, res, next) => {
   }
 };
 
-const getCurrentUser = async (req, res, next) => {};
+const getCurrentUser = async (req, res, next) => {
+  try {
+    // Middleware (authenticate) zaten kullanıcıyı bulup req.user'a ekledi.
+    const { name, email, dailyCalories, notRecommendedProducts } = req.user;
+
+    res.status(200).json({
+      user: {
+        name,
+        email,
+        dailyCalories,
+        notRecommendedProducts,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server error',
+      error: error.message,
+    });
+  }
+};
 
 module.exports = { registerUser, loginUser, logoutUser, getCurrentUser };
