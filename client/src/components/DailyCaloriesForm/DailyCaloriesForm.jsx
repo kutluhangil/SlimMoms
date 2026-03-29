@@ -93,83 +93,87 @@ const DailyCaloriesForm = ({ onSuccess }) => {
   };
 
   return (
-  <form className={styles.form} onSubmit={handleSubmit}>
-    <div className={styles.column}>
-      <div className={styles.fieldGroup}>
-        <input
-          className={`${styles.input} ${errors.height ? styles.inputError : ''}`}
-          type="number"
-          name="height"
-          placeholder="Height (cm) *"
-          value={form.height}
-          onChange={handleChange}
-        />
-        {errors.height && <span className={styles.error}>{errors.height}</span>}
-      </div>
-
-      <div className={styles.fieldGroup}>
-        <input
-          className={`${styles.input} ${errors.age ? styles.inputError : ''}`}
-          type="number"
-          name="age"
-          placeholder="Age *"
-          value={form.age}
-          onChange={handleChange}
-        />
-        {errors.age && <span className={styles.error}>{errors.age}</span>}
-      </div>
-
-      <div className={styles.fieldGroup}>
-        <input
-          className={`${styles.input} ${errors.weight ? styles.inputError : ''}`}
-          type="number"
-          name="weight"
-          placeholder="Current weight (kg) *"
-          value={form.weight}
-          onChange={handleChange}
-        />
-        {errors.weight && <span className={styles.error}>{errors.weight}</span>}
-      </div>
-    </div>
-
-    <div className={styles.column}>
-      <div className={styles.fieldGroup}>
-        <input
-          className={`${styles.input} ${errors.desiredWeight ? styles.inputError : ''}`}
-          type="number"
-          name="desiredWeight"
-          placeholder="Desired weight (kg) *"
-          value={form.desiredWeight}
-          onChange={handleChange}
-        />
-        {errors.desiredWeight && <span className={styles.error}>{errors.desiredWeight}</span>}
-      </div>
-
-      <div className={styles.fieldGroup}>
-        <span className={styles.bloodTypeLabel}>Blood type *</span>
-        <div className={styles.bloodTypeGroup}>
-          {[1, 2, 3, 4].map((type) => (
-            <label key={type} className={styles.radioLabel}>
-              <input
-                type="radio"
-                name="bloodType"
-                value={type}
-                checked={Number(form.bloodType) === type}
-                onChange={handleChange}
-                className={styles.radioInput}
-              />
-              {type}
-            </label>
-          ))}
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <div className={styles.column}>
+        <div className={styles.fieldGroup}>
+          <label className={styles.label} htmlFor="height">Height (cm) *</label>
+          <input
+            className={`${styles.input} ${errors.height ? styles.inputError : ''}`}
+            type="number"
+            id="height"
+            name="height"
+            value={form.height}
+            onChange={handleChange}
+          />
+          {errors.height && <span className={styles.error}>{errors.height}</span>}
         </div>
-        {errors.bloodType && <span className={styles.error}>{errors.bloodType}</span>}
-      </div>
-    </div>
 
-    <button type="submit" className={styles.btn}>
-      Start losing weight
-    </button>
-  </form>
+        <div className={styles.fieldGroup}>
+          <label className={styles.label} htmlFor="age">Age *</label>
+          <input
+            className={`${styles.input} ${errors.age ? styles.inputError : ''}`}
+            type="number"
+            id="age"
+            name="age"
+            value={form.age}
+            onChange={handleChange}
+          />
+          {errors.age && <span className={styles.error}>{errors.age}</span>}
+        </div>
+
+        <div className={styles.fieldGroup}>
+          <label className={styles.label} htmlFor="weight">Current weight (kg) *</label>
+          <input
+            className={`${styles.input} ${errors.weight ? styles.inputError : ''}`}
+            type="number"
+            id="weight"
+            name="weight"
+            value={form.weight}
+            onChange={handleChange}
+          />
+          {errors.weight && <span className={styles.error}>{errors.weight}</span>}
+        </div>
+      </div>
+
+      <div className={styles.column}>
+        <div className={styles.fieldGroup}>
+          <label className={styles.label} htmlFor="desiredWeight">Desired weight (kg) *</label>
+          <input
+            className={`${styles.input} ${errors.desiredWeight ? styles.inputError : ''}`}
+            type="number"
+            id="desiredWeight"
+            name="desiredWeight"
+            value={form.desiredWeight}
+            onChange={handleChange}
+          />
+          {errors.desiredWeight && <span className={styles.error}>{errors.desiredWeight}</span>}
+        </div>
+
+        <div className={styles.fieldGroup}>
+          <span className={styles.bloodTypeLabel}>Blood type *</span>
+          <div className={styles.bloodTypeGroup}>
+            {[1, 2, 3, 4].map((type) => (
+              <label key={type} className={styles.radioLabel}>
+                <input
+                  type="radio"
+                  name="bloodType"
+                  value={type}
+                  checked={Number(form.bloodType) === type}
+                  onChange={handleChange}
+                  className={styles.radioInput}
+                />
+                {type}
+              </label>
+            ))}
+          </div>
+          {errors.bloodType && <span className={styles.error}>{errors.bloodType}</span>}
+        </div>
+      </div>
+
+      <button type="submit" className={styles.btn}>
+        Start losing weight
+      </button>
+    </form>
   );
 };
 

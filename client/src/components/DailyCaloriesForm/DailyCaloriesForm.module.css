@@ -12,17 +12,38 @@
   gap: 32px;
 }
 
+.fieldGroup {
+  margin: 0;
+}
+
+.fieldGroup label,
+.fieldGroup span {
+  display: block;
+  margin: 0 0 14px;
+  color: #9b9faa;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
 .input {
   width: 100%;
-  padding: 10px 0;
-  border: none;
-  color: #9B9FAA;
+  border: 0;
   border-bottom: 1px solid #e0e0e0;
+  background: transparent;
+  padding: 0 0 13px;
+  color: #9B9FAA;
   font-size: 14px;
   font-weight: 700;
+  line-height: 1.2;
   outline: none;
-  background: transparent;
-  transition: border-color 0.2s;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .input:focus {
@@ -52,25 +73,32 @@
   background-color: #f27b24;
 }
 
-.fieldGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  color: #9B9FAA;
-}
-
 .error {
   font-size: 12px;
   color: #f00;
 }
 
-.bloodTypeLabel {
-  font-size: 14px;
-  color: #9b9faa;
-  margin: 0;
-  padding: 10px 0;
-  border-bottom: 1px solid #e0e0e0;
+.label {
   display: block;
+  margin: 0 0 14px;
+  color: #9b9faa;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.bloodTypeLabel {
+  display: block;
+  margin: 0 0 14px;
+  color: #9b9faa;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding-top: 36px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .bloodTypeGroup {
@@ -79,18 +107,46 @@
 }
 
 .radioLabel {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
+  color: #9b9faa;
   font-size: 14px;
+  line-height: 1;
   cursor: pointer;
 }
 
 .radioInput {
-  accent-color: #fc842d;
-  width: 16px;
-  height: 16px;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccd0d8;
+  border-radius: 50%;
+  background-color: #ffffff;
+  position: relative;
+  margin: 0;
   cursor: pointer;
+}
+
+.radioInput:checked {
+  border-color: #fc842d;
+}
+
+.radioInput:checked::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background-color: #fc842d;
+}
+
+.radioInput:focus {
+  outline: none;
+}
+
+.radioLabel input[type="radio"]:checked + span {
+  color: #fc842d;
 }
 
 @media (max-width: 1024px) {
