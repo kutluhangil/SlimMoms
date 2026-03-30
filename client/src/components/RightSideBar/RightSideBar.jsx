@@ -3,10 +3,7 @@ import styles from './RightSideBar.module.css';
 import { selectCalculatorResult } from '../../redux/calculator/calculatorSelectors';
 
 const RightSideBar = () => {
-  const { summary } = useSelector((state) => ({
-    summary: state.diary.summary,
-  }));
-
+  const summary = useSelector((state) => state.diary.summary);
   const { notRecommended } = useSelector(selectCalculatorResult);
 
   const hasSummary = summary?.dailyRate != null;

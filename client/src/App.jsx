@@ -34,9 +34,9 @@ const AppContent = () => {
           element={<PublicRoute component={RegistrationPage} />}
         />
         <Route
-          path="/diary"
-          element={<PrivateRoute component={DiaryPage} />}
-        />
+  path="/diary"
+  element={<DiaryPage />}
+/>
         <Route
           path="/calculator"
           element={<PrivateRoute component={CalculatorPage} />}

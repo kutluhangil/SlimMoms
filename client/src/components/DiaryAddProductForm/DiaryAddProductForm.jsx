@@ -7,7 +7,6 @@ import styles from './DiaryAddProductForm.module.css';
 
 const DiaryAddProductForm = () => {
   const dispatch = useDispatch();
-
   const [productName, setProductName] = useState('');
   const [grams, setGrams] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -21,7 +20,6 @@ const DiaryAddProductForm = () => {
   const handleProductChange = (e) => {
     const value = e.target.value;
     setProductName(value);
-
     clearTimeout(debounceRef.current);
 
     debounceRef.current = setTimeout(async () => {
@@ -33,12 +31,10 @@ const DiaryAddProductForm = () => {
       lastQueryRef.current = value;
 
       try {
-        const { data } = await axiosInstance.get(
-          `/products?search=${value}`
-        );
+        const { data } = await axiosInstance.get(`/products?search=${value}`);
 
         if (lastQueryRef.current === value) {
-          setSuggestions(data);
+          setSuggestions(Array.isArray(data) ? data : data.products || []);
         }
       } catch {
         setSuggestions([]);
@@ -62,21 +58,19 @@ const DiaryAddProductForm = () => {
 
     try {
       dispatch(showLoader());
-
       await dispatch(
         addProduct({
           productName,
           grams: Number(grams),
         })
       ).unwrap();
-
+      dispatch(hideLoader());
       setProductName('');
       setGrams('');
       setSuggestions([]);
     } catch {
-      setError('Failed to add product');
-    } finally {
       dispatch(hideLoader());
+      setError('Failed to add product');
     }
   };
 
@@ -111,7 +105,7 @@ const DiaryAddProductForm = () => {
           <div className={styles.dropdown}>
             {suggestions.map((item) => (
               <div
-                key={item._id} // ✅ FIX
+                key={item._id}
                 className={styles.dropdownItem}
                 onClick={() => handleSelectSuggestion(item)}
               >
