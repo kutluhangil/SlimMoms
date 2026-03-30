@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { logOut } from '../../redux/auth/authOperations';
 import { clearUser } from '../../redux/auth/authSlice';
 import { persistor } from '../../redux/store';

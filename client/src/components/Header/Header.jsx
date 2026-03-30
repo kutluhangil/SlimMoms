@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router';
 import { useSelector } from 'react-redux';
 
 import Logo from '../Logo/Logo';
@@ -11,6 +11,7 @@ const Header = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const burgerRef = useRef(null);
   const { pathname } = useLocation();
 
   const prevPathname = useRef(pathname);
@@ -18,14 +19,18 @@ const Header = () => {
   useEffect(() => {
     if (prevPathname.current === pathname) return;
     prevPathname.current = pathname;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMenuOpen(false);
   }, [pathname]);
 
   useEffect(() => {
     if (!isMenuOpen) return;
     const handleMouseDown = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(e.target) &&
+        burgerRef.current &&
+        !burgerRef.current.contains(e.target)
+      ) {
         setIsMenuOpen(false);
       }
     };
@@ -33,16 +38,24 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleMouseDown);
   }, [isMenuOpen]);
 
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-  const closeMenu = () => setIsMenuOpen(false);
+  useEffect(() => {
+    if (isMenuOpen && menuRef.current) {
+      menuRef.current.focus();
+    }
+  }, [isMenuOpen]);
 
-   const getAuthClass = ({ isActive }) =>
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    burgerRef.current?.focus();
+  };
+
+  const getAuthClass = ({ isActive }) =>
     isActive ? `${styles.authLink} ${styles.authLinkActive}` : styles.authLink;
 
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-
         {/* Sol grup: Logo + divider + auth links (logout) */}
         <div className={styles.leftGroup}>
           <Logo isLoggedIn={isLoggedIn} />
@@ -51,8 +64,12 @@ const Header = () => {
             <>
               <div className={styles.divider} />
               <nav className={styles.authLinks}>
-                <NavLink to="/login" className={getAuthClass} end>LOG IN</NavLink>
-                <NavLink to="/register" className={getAuthClass} end>REGISTRATION</NavLink>
+                <NavLink to="/login" className={getAuthClass} end>
+                  LOG IN
+                </NavLink>
+                <NavLink to="/register" className={getAuthClass} end>
+                  REGISTRATION
+                </NavLink>
               </nav>
             </>
           )}
@@ -69,32 +86,58 @@ const Header = () => {
 
         {/* Hamburger (her durumda mobilde görünür) */}
         <button
+          ref={burgerRef}
           className={styles.burger}
           onClick={toggleMenu}
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isMenuOpen}
+          aria-controls="mobile-menu"
         >
-          <span className={`${styles.burgerLine} ${isMenuOpen ? styles.burgerLineTop : ''}`} />
-          <span className={`${styles.burgerLine} ${isMenuOpen ? styles.burgerLineMid : ''}`} />
-          <span className={`${styles.burgerLine} ${isMenuOpen ? styles.burgerLineBot : ''}`} />
+          <span
+            className={`${styles.burgerLine} ${isMenuOpen ? styles.burgerLineTop : ''}`}
+          />
+          <span
+            className={`${styles.burgerLine} ${isMenuOpen ? styles.burgerLineMid : ''}`}
+          />
+          <span
+            className={`${styles.burgerLine} ${isMenuOpen ? styles.burgerLineBot : ''}`}
+          />
         </button>
       </div>
 
       {/* Mobil dropdown */}
       {isMenuOpen && (
-        <div className={styles.mobileMenu} ref={menuRef}>
+        <nav
+          id="mobile-menu"
+          className={styles.mobileMenu}
+          ref={menuRef}
+          aria-label="Mobile navigation"
+          tabIndex="-1"
+        >
           {isLoggedIn ? (
             <>
               <Navigation onLinkClick={closeMenu} />
               <UserInfo />
             </>
           ) : (
-            <nav className={styles.mobileAuthLinks}>
-              <NavLink to="/login" className={styles.authLink} onClick={closeMenu}>Log In</NavLink>
-              <NavLink to="/register" className={styles.authLink} onClick={closeMenu}>Registration</NavLink>
-            </nav>
+            <div className={styles.mobileAuthLinks}>
+              <NavLink
+                to="/login"
+                className={styles.authLink}
+                onClick={closeMenu}
+              >
+                Log In
+              </NavLink>
+              <NavLink
+                to="/register"
+                className={styles.authLink}
+                onClick={closeMenu}
+              >
+                Registration
+              </NavLink>
+            </div>
           )}
-        </div>
+        </nav>
       )}
     </header>
   );

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import styles from './Logo.module.css';
 
 const Logo = ({ isLoggedIn }) => {

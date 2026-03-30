@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { logIn } from '../../redux/auth/authOperations';
 import Loader from '../Loader/Loader';
 import styles from './LoginForm.module.css';
