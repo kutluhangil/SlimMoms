@@ -5,8 +5,13 @@ const addProduct = async (req, res, next) => {
   try {
     const { date, productId, weight } = req.body;
 
-    if (!date || !productId || weight === undefined) {
-      return res.status(400).json({ message: 'Missing required fields: date, productId, weight' });
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      return res.status(400).json({ message: 'date YYYY-MM-DD formatında olmalıdır' });
+    }
+
+    // Weight için sıfırdan büyük olma kontrolü eklendi
+    if (!productId || !weight || weight <= 0) {
+      return res.status(400).json({ message: 'Geçerli bir productId ve 0 dan büyük bir weight gönderilmelidir' });
     }
 
     const product = await Product.findById(productId);
@@ -16,30 +21,27 @@ const addProduct = async (req, res, next) => {
 
     const portionCalories = Math.round((product.calories / 100) * weight);
 
-    let dayInfo = await DayInfo.findOne({ date, userId: req.user._id });
-
-    if (!dayInfo) {
-      dayInfo = new DayInfo({
-        date,
-        userId: req.user._id,
-        eatenProducts: [],
-        daySummary: { eatenCalories: 0 },
-      });
-    }
-
-    dayInfo.eatenProducts.push({
+    const newEntry = {
       productId: product._id,
       title: product.title,
       weight,
       calories: portionCalories,
-    });
+    };
 
-    dayInfo.daySummary.eatenCalories =
-      (dayInfo.daySummary.eatenCalories || 0) + portionCalories;
+    // Eşzamanlı isteklerde patlamaması (race condition) için 
+    // find-then-save yerine findOneAndUpdate kullanıyoruz.
+    const dayInfo = await DayInfo.findOneAndUpdate(
+      { date, userId: req.user._id },
+      {
+        $push: { eatenProducts: newEntry },
+        $inc: { 'daySummary.eatenCalories': portionCalories },
+        $setOnInsert: { date, userId: req.user._id },
+      },
+      { new: true, upsert: true, runValidators: true }
+    );
 
-    await dayInfo.save();
-
-    return res.status(200).json(dayInfo);
+    // Yeni kayıt veya update durumunda 201 Created döndürüyoruz
+    return res.status(201).json(dayInfo);
   } catch (err) {
     next(err);
   }
@@ -80,6 +82,10 @@ const deleteProduct = async (req, res, next) => {
 const getDayInfo = async (req, res, next) => {
   try {
     const { date } = req.params;
+
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      return res.status(400).json({ message: 'date YYYY-MM-DD formatında olmalıdır' });
+    }
 
     const dayInfo = await DayInfo.findOne({ date, userId: req.user._id });
 

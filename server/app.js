@@ -4,6 +4,11 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const connectDB = require('./db/connect');
 
+// Route importları dosyanın başında tanımlandı
+const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
+const diaryRoutes = require('./routes/diaryRoutes');
+
 dotenv.config();
 
 const app = express();
@@ -16,11 +21,6 @@ app.use(express.json());
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
 });
-
-// Routes
-const authRoutes = require('./routes/authRoutes');
-const productRoutes = require('./routes/productRoutes');
-const diaryRoutes = require('./routes/diaryRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
