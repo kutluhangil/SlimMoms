@@ -1,28 +1,83 @@
 .backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  background-color: rgba(33, 33, 33, 0.32);
+  display: grid;
+  place-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease;
 }
 
 .modal {
   position: relative;
+  width: min(90vw, 670px);
+  min-height: 450px;
   background-color: #fff;
-  padding: 40px;
+  padding: 56px 60px 58px;
   border-radius: 8px;
-  min-width: 320px;
+  box-shadow: 0 24px 40px rgba(33, 33, 33, 0.22);
+  animation: slideUp 0.25s ease;
 }
 
 .closeBtn {
   position: absolute;
-  top: 12px;
+  top: 16px;
   right: 16px;
   background: none;
   border: none;
-  font-size: 24px;
-  cursor: pointer;
+  font-size: 28px;
   line-height: 1;
+  cursor: pointer;
+  color: #212121;
+  transition: color 0.2s;
+}
+
+.closeBtn:hover {
+  color: #fc842d;
+}
+
+/* Tablet */
+@media (max-width: 1279px) {
+  .modal {
+    width: min(86vw, 670px);
+    min-height: 420px;
+    padding: 52px 44px 50px;
+  }
+}
+
+/* Mobil */
+@media (max-width: 767px) {
+  .modal {
+    width: min(86vw, 380px);
+    min-height: 0;
+    padding: 40px 20px 34px;
+    border-radius: 24px 24px 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%); /* yatay ortalama */
+    animation: slideUpMobile 0.25s ease; /* mobil için özel animasyon */
+  }
+
+  .closeBtn {
+    top: 12px;
+    right: 14px;
+    font-size: 24px;
+  }
+}
+
+/* Animasyonlar */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideUpMobile {
+  from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+  to   { transform: translateX(-50%) translateY(0); opacity: 1; }
 }

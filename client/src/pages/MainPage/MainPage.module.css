@@ -1,7 +1,130 @@
 .page {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 60px 32px;
-  min-height: calc(100vh - 80px);
+  position: relative;
+  min-height: 100vh;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.layer1 {
+  position: absolute;
+  width: 700px;
+  height: 500px;
+  top: -40px;
+  left: 1000px;
+  background-image: url("../../assets/images/desktop-home-layer1.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.layer2 {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 450px;
+  left: 950px;
+  background-image: url("../../assets/images/desktop-home-layer2.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.layer3 {
+  position: absolute;
+  width: 730px;
+  height: 800px;
+  top: -40px;
+  left: 370px;
+  background-image: url("../../assets/images/desktop-home-layer3.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.layer4 {
+  position: absolute;
+  width: 602px;
+  height: 816px;
+  top: 70px;
+  left: 925px;
+  background-image: url("../../assets/images/desktop-home-layer4.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 3;
+  width: min(100%, 560px);
+  padding: 108px 16px 40px;
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 700;
+  color: #212121;
+  line-height: 1.2;
+  margin-top: 50px;
+  margin-bottom: 58px;
+  max-width: 608px;
+}
+
+@media (max-width: 1279px) and (min-width: 768px) {
+  .layer1 {
+    width: 400px;
+    height: 285px;
+    top: 550px;
+    left: 950px;
+  }
+
+  .layer2 {
+    width: 180px;
+    height: 180px;
+    top: 450px;
+    left: 1020px;
+  }
+
+  .layer3 {
+    width: 450px;
+    height: 500px;
+    top: 400px;
+    left: 600px;
+    background-image: url("../../assets/images/tablet-home-layer1.png");
+  }
+
+  .layer4 {
+    width: 700px;
+    height: 715px;
+    top: 300px;
+    left: 740px;
+  }
+
+  .content {
+    padding: 52px 20px 30px;
+  }
+
+  .title {
+    margin-bottom: 50px;
+  }
+}
+
+@media (max-width: 767px) {
+  .layer1, .layer2, .layer3, .layer4 {
+    display: none;
+  }
+
+  .content {
+    padding: 50px 18px 24px;
+    width: min(100%, 352px);
+  }
+
+  .title {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
 }

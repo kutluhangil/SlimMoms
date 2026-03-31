@@ -14,6 +14,10 @@ const calculatorSlice = createSlice({
       state.dailyCalories = null;
       state.notRecommendedProducts = [];
     },
+    setLocalResult(state, action) {
+      state.dailyCalories = action.payload.dailyCalories;
+      state.notRecommendedProducts = action.payload.notRecommended;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -33,5 +37,5 @@ const calculatorSlice = createSlice({
   },
 });
 
-export const { clearResult } = calculatorSlice.actions;
+export const { clearResult, setLocalResult } = calculatorSlice.actions;
 export default calculatorSlice.reducer;

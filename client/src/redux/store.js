@@ -10,10 +10,10 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-import authReducer from './slices/authSlice';
-import loaderReducer from './slices/loaderSlice';
-import diaryReducer from './slices/diarySlice';
-import calculatorReducer from './slices/calculatorSlice';
+import authReducer from './auth/authSlice';
+import loaderReducer from './loader/loaderSlice';
+import diaryReducer from './diary/diarySlice';
+import calculatorReducer from './calculator/calculatorSlice';
 
 // Vite ESM ortamında redux-persist/lib/storage import sorunu yaşandığı için
 // localStorage'ı doğrudan sarıyoruz

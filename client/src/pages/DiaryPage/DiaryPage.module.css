@@ -1,12 +1,49 @@
 .layout {
   display: flex;
-  min-height: calc(100vh - 80px);
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 .main {
   flex: 1;
-  padding: 40px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  padding: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.decorDesktop {
+  position: absolute;
+  width: 740px;
+  height: 842px;
+  top: 35px;
+  left: 1000px;
+  background-image: url("../../assets/images/dekstop-calculator-layer.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@media (max-width: 1279px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .decorDesktop {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding: 24px;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 479px) {
+  .main {
+    padding: 16px;
+  }
 }

@@ -31,6 +31,56 @@
   padding: 0 4px;
 }
 
-.deleteBtn:hover {
+.deleteBtn:hover:not(:disabled) {
   color: #fc842d;
+}
+
+.deleteBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .weight,
+  .calories {
+    min-width: 48px;
+    font-size: 12px;
+  }
+  .item {
+    gap: 8px;
+    padding: 8px 0;
+  }
+  .name {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+  .weight,
+  .calories {
+    min-width: 55px;
+    font-size: 13px;
+  }
+  .item {
+    gap: 12px;
+    padding: 10px 0;
+  }
+  .name {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .weight,
+  .calories {
+    min-width: 60px;
+    font-size: 14px;
+  }
+  .item {
+    gap: 16px;
+    padding: 12px 0;
+  }
+  .name {
+    font-size: 14px;
+  }
 }
