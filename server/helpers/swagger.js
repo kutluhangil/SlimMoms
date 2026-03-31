@@ -9,7 +9,7 @@ const swaggerOptions = {
       version: '1.0.0',
       description: 'Diyet ve Kalori Takip Uygulaması API Dokümantasyonu',
     },
-    servers: [{ url: 'http://localhost:5000' }],
+    servers: [{ url: process.env.API_URL || 'http://localhost:5000' }],
     components: {
       securitySchemes: {
         BearerAuth: {
