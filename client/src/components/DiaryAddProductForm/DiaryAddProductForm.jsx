@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../redux/diary/diaryOperations';
-import { showLoader, hideLoader } from '../../redux/loader/loaderSlice';
 import axiosInstance from '../../api/axiosInstance';
 import styles from './DiaryAddProductForm.module.css';
 
@@ -57,19 +56,11 @@ const DiaryAddProductForm = () => {
     }
 
     try {
-      dispatch(showLoader());
-      await dispatch(
-        addProduct({
-          productName,
-          grams: Number(grams),
-        })
-      ).unwrap();
-      dispatch(hideLoader());
+      await dispatch(addProduct({ productName, grams: Number(grams) })).unwrap();
       setProductName('');
       setGrams('');
       setSuggestions([]);
     } catch {
-      dispatch(hideLoader());
       setError('Failed to add product');
     }
   };
