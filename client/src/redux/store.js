@@ -15,8 +15,6 @@ import loaderReducer from './loader/loaderSlice';
 import diaryReducer from './diary/diarySlice';
 import calculatorReducer from './calculator/calculatorSlice';
 
-// Vite ESM ortamında redux-persist/lib/storage import sorunu yaşandığı için
-// localStorage'ı doğrudan sarıyoruz
 const storage = {
   getItem: (key) => Promise.resolve(localStorage.getItem(key)),
   setItem: (key, value) => Promise.resolve(localStorage.setItem(key, value)),
@@ -26,7 +24,7 @@ const storage = {
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token', 'user', 'isLoggedIn'],
+  whitelist: ['token', 'user'], // isLoggedIn kaldırıldı
 };
 
 export const store = configureStore({

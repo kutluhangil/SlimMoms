@@ -75,7 +75,7 @@ const DailyCaloriesForm = ({ onSuccess }) => {
       dispatch(
         setLocalResult({
           dailyCalories: Math.round(dailyCalories),
-          notRecommended: [],
+          notRecommendedProducts: [],
         })
       );
 
@@ -110,9 +110,7 @@ const DailyCaloriesForm = ({ onSuccess }) => {
             value={form.height}
             onChange={handleChange}
           />
-          {errors.height && (
-            <span className={styles.error}>{errors.height}</span>
-          )}
+          {errors.height && <span className={styles.error}>{errors.height}</span>}
         </div>
 
         <div className={styles.fieldGroup}>
@@ -142,9 +140,7 @@ const DailyCaloriesForm = ({ onSuccess }) => {
             value={form.weight}
             onChange={handleChange}
           />
-          {errors.weight && (
-            <span className={styles.error}>{errors.weight}</span>
-          )}
+          {errors.weight && <span className={styles.error}>{errors.weight}</span>}
         </div>
       </div>
 
@@ -161,15 +157,11 @@ const DailyCaloriesForm = ({ onSuccess }) => {
             value={form.desiredWeight}
             onChange={handleChange}
           />
-          {errors.desiredWeight && (
-            <span className={styles.error}>{errors.desiredWeight}</span>
-          )}
+          {errors.desiredWeight && <span className={styles.error}>{errors.desiredWeight}</span>}
         </div>
 
         <div className={styles.fieldGroup}>
-          <span
-            className={`${styles.bloodTypeLabel} ${errors.bloodType ? styles.bloodTypeLabelError : ''}`}
-          >
+          <span className={`${styles.bloodTypeLabel} ${errors.bloodType ? styles.bloodTypeLabelError : ''}`}>
             Blood type *
           </span>
           <div className={styles.bloodTypeGroup}>
@@ -184,14 +176,12 @@ const DailyCaloriesForm = ({ onSuccess }) => {
                     onChange={handleChange}
                     className={styles.radioInput}
                   />
-                {type}
+                  {type}
                 </div>
               </label>
             ))}
           </div>
-          {errors.bloodType && (
-            <span className={styles.error}>{errors.bloodType}</span>
-          )}
+          {errors.bloodType && <span className={styles.error}>{errors.bloodType}</span>}
         </div>
       </div>
 

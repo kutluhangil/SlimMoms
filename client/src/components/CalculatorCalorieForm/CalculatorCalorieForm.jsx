@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { calculateDailyCalories } from '../../redux/calculator/calculatorOperations';
 import styles from './CalculatorCalorieForm.module.css';
 
@@ -25,7 +26,9 @@ const BLOOD_TYPES = [1, 2, 3, 4];
 
 const CalculatorCalorieForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isLoading = useSelector((state) => state.loader.isLoading);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const [fields, setFields] = useState({
     height: '',
@@ -53,6 +56,12 @@ const CalculatorCalorieForm = () => {
     const fieldErrors = validate(fields);
     setErrors(fieldErrors);
     if (Object.keys(fieldErrors).length > 0) return;
+
+    if (!isLoggedIn) {
+      navigate('/login');
+      return;
+    }
+
     await dispatch(
       calculateDailyCalories({
         height: +fields.height,
