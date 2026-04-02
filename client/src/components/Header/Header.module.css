@@ -143,14 +143,14 @@
   .burger {
     display: none;
   }
-
-  .mobileMenu {
-    display: none !important;
-  }
 }
 
 /* ── Desktop: 1280px+ ── */
 @media screen and (min-width: 1280px) {
+  .mobileMenu {
+    display: none !important;
+  }
+
   .leftGroup {
     padding: 24px 32px 24px 0;
   }
