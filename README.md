@@ -42,12 +42,11 @@ Unregistered users can also use a quick calorie calculator on the landing page w
 
 > **API Documentation (Swagger UI):** [https://goit-server-slim-moms.onrender.com/api-docs](https://goit-server-slim-moms.onrender.com/api-docs)
 
+> **Backend:** [https://goit-server-slim-moms.onrender.com](https://goit-server-slim-moms.onrender.com)
+
 ---
 
 ## Screenshots
-
-<!-- Add screenshots below. Recommended: Main Page, Diary Page, Calculator Page -->
-<!-- Example: ![Main Page](./screenshots/main-page.png) -->
 
 | Main Page                                 | Login Page                                  | Registration Page                                         |
 | ----------------------------------------- | ------------------------------------------- | --------------------------------------------------------- |
