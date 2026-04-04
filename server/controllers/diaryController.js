@@ -37,18 +37,21 @@ const addProduct = async (req, res, next) => {
 
     // Eşzamanlı isteklerde patlamaması (race condition) için
     // find-then-save yerine findOneAndUpdate kullanıyoruz.
-    const dayInfo = await DayInfo.findOneAndUpdate(
+    // rawResult ile ham MongoDB sonucunu alıyoruz ki 201 / 200 ayrımını
+    // doğru yapabilelim — lastErrorObject.updatedExisting false ise upsert ile
+    // yeni kayıt oluşturulmuş demektir.
+    const result = await DayInfo.findOneAndUpdate(
       { date, userId: req.user._id },
       {
         $push: { eatenProducts: newEntry },
         $inc: { 'daySummary.eatenCalories': portionCalories },
         $setOnInsert: { date, userId: req.user._id },
       },
-      { new: true, upsert: true, runValidators: true }
+      { new: true, upsert: true, runValidators: true, rawResult: true }
     );
 
-    // Yeni kayıt veya update durumunda 201 Created döndürüyoruz
-    return res.status(dayInfo._id ? 200 : 201).json(dayInfo);
+    const isNew = !result.lastErrorObject.updatedExisting;
+    return res.status(isNew ? 201 : 200).json(result.value);
   } catch (err) {
     next(err);
   }
