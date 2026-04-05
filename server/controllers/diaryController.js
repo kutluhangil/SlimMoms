@@ -47,10 +47,10 @@ const addProduct = async (req, res, next) => {
         $inc: { 'daySummary.eatenCalories': portionCalories },
         $setOnInsert: { date, userId: req.user._id },
       },
-      { new: true, upsert: true, runValidators: true, rawResult: true }
+      { new: true, upsert: true, runValidators: true, includeResultMetadata: true }
     );
 
-    const isNew = !result.lastErrorObject.updatedExisting;
+    const isNew = !result.lastErrorObject?.updatedExisting;
     return res.status(isNew ? 201 : 200).json(result.value);
   } catch (err) {
     next(err);
